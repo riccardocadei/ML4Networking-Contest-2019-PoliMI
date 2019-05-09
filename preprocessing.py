@@ -23,5 +23,14 @@ def preprocessing(usertr):
     usertr.LTE_no=usertr.Cumulative_No_Service_Time_LTE/(usertr.Cumulative_Full_Service_Time_LTE+usertr.Cumulative_Lim_Service_Time_LTE+usertr.Cumulative_No_Service_Time_LTE)
     
    # usertr = usertr.drop(["User_Id","Max_RSRQ","Cumulative_Full_Service_Time_UMTS","Cumulative_Lim_Service_Time_UMTS","Cumulative_No_Service_Time_UMTS","Cumulative_Full_Service_Time_LTE","Cumulative_Lim_Service_Time_LTE","Cumulative_No_Service_Time_LTE"], axis=1)
+
+    a=usertr.LTE_speed.mean()
+    b=usertr.UMTS_speed.mean()
+
+    for i in range(usertr.shape[0]):
+        if math.isnan(usertr.LTE_speed[i]):
+             usertr.LTE_speed[i]=a
+        if math.isnan(usertr.UMTS_speed[i]):
+             usertr.UMTS_speed[i]=b
     
     return usertr
